@@ -20,6 +20,6 @@ from mailserviceapp import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^check/',views.check),
-    url(r'^snsNotification/',views.sns_notification)
+    url(r'^api/health',views.health),
+    url(r'^api/send_email',views.send_email)
 ]
