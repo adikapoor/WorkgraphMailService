@@ -20,10 +20,15 @@ def send_email(request):
         to = request.data['to']
         cc = request.data['cc']
         bcc = request.data['bcc']
-        body = request.data['body']
         source = request.data['from']
+        html_body = None
+        text_body = None
+        if 'html_body' in request.data :
+            html_body = request.data['html_body']
+        if 'text_body' in request.data :
+            text_body = request.data['text_body']
         conn = ses.connect_to_region('us-east-1')
-        conn.send_email(source=source,subject=subject,body=body,to_addresses=to, cc_addresses=cc, bcc_addresses=bcc)
+        conn.send_email(source=source,subject=subject,body = None, to_addresses=to, cc_addresses=cc, bcc_addresses=bcc,html_body= html_body, text_body= text_body)
         response_message = "success"
         response_status = status.HTTP_201_CREATED
     except KeyError as key_error:
